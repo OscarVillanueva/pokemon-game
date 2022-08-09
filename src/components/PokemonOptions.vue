@@ -1,7 +1,13 @@
 <template>
   <div class="options-container">
     <ul>
-      <li v-for="pokemon in pokemos" :key="pokemon.id">{{ pokemon.name }}</li>
+      <li
+        v-for="pokemon in pokemons"
+        :key="pokemon.id"
+        @click="$emit('selection', pokemon.id)"
+      >
+        {{ pokemon.name }}
+      </li>
     </ul>
   </div>
 </template>
@@ -10,7 +16,7 @@
 export default {
   name: "PokemonOptions",
   props: {
-    pokemos: {
+    pokemons: {
       type: Array,
       required: true,
       default: [],
