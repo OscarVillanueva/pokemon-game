@@ -1,7 +1,7 @@
 <template>
   <div class="pokemon-container">
-    <img :src="imgSrc" class="hidden-pokemon" />
-    <img v-show="showPokemon" :src="imgSrc" class="fade-in" />
+    <img v-if="!showPokemon" :src="imgSrc" class="hidden-pokemon" />
+    <img v-else :src="imgSrc" class="fade-in" />
   </div>
 </template>
 
@@ -38,7 +38,6 @@ export default {
 }
 img {
   height: 200px;
-  position: absolute;
   width: 100vw;
   margin-left: -50vw;
   user-select: none;
