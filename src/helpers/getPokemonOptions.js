@@ -29,7 +29,8 @@ class PokemonFactory {
         this.already.push(id)
 
       }
-      else options.push(id)
+      else
+        if (!options.includes(id)) options.push(id)
 
       laps = laps + 1;
       if (laps >= 50 || (answer !== 0 && options.length === 3)) ready = true
