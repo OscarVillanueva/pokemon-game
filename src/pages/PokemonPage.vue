@@ -8,11 +8,6 @@
       @selection="checkAnswer"
       :pokemon="pokemon"
     />
-
-    <!-- <template v-if="showAnswer">
-      <h2 class="fade-in">{{ message }}</h2>
-      <button @click="next">Siguiente</button>
-    </template> -->
   </div>
 </template>
 
@@ -32,10 +27,12 @@ export default {
   },
   data() {
     return {
-      pokemons: [],
-      pokemon: null,
-      showPokemon: false,
+      life: 3,
       message: "",
+      pokemon: null,
+      pokemons: [],
+      score: 0,
+      showPokemon: false,
     };
   },
   methods: {
@@ -47,9 +44,13 @@ export default {
         () => Math.random() - 0.5
       );
     },
-    checkAnswer() {
+    checkAnswer(id) {
       this.showPokemon = true;
-      setTimeout(() => this.next(), 2000);
+
+      if (id === this.pokemon.id) this.score = this.score + 1;
+      else this.life = this.life - 1;
+
+      if (this.life >= 0) setTimeout(() => this.next(), 2000);
     },
     async next() {
       this.pokemon = null;

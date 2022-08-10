@@ -37,9 +37,9 @@ export default {
     };
   },
   methods: {
-    checkAnswer() {
+    checkAnswer(id) {
       this.showAnswer = true;
-      this.$emit("selection");
+      this.$emit("selection", id);
     },
   },
 };
