@@ -7,27 +7,36 @@ class PokemonFactory {
   }
 
   /**
-   * It generates four random numbers between 1 and 650, and then checks if they are already in the
-   * array. If they are not, it adds them to the array
+   * It generates a random number between 1 and 650, checks if it's already been used, and if not, it
+   * adds it to the array of already used numbers
+   * @returns An object with two properties: answer and options.
    */
   generateFourPokemons() {
 
-    let appended = 0
+    let answer = 0
     let id = 0
     let laps = 0
+    let options = []
+    let ready = false
 
-    while (appended < 4 && laps < 50) {
+    while (!ready) {
 
       id = Math.floor((Math.random() * 650) + 1);
 
-      if (!this.already.includes(id)) {
+      if (!this.already.includes(id) && answer === 0) {
+
+        answer = id
         this.already.push(id)
-        appended = appended + 1;
+
       }
+      else options.push(id)
 
       laps = laps + 1;
+      if (laps >= 50 || (answer !== 0 && options.length === 3)) ready = true
 
     }
+
+    return [answer, ...options]
 
   }
 
@@ -65,8 +74,12 @@ class PokemonFactory {
    * @returns An array of four pokemon names
    */
   async getPokemonOptions() {
-    this.generateFourPokemons()
-    return await this.getPokemonNames(this.already)
+    const options = await this.getPokemonNames(this.generateFourPokemons())
+
+    return {
+      answer: options.shift(),
+      options,
+    }
   }
 
 }

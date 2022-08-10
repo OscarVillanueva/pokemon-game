@@ -42,9 +42,10 @@ export default {
     async getPokemons() {
       const data = await pokemonFactory.getPokemonOptions();
 
-      const rndInt = Math.floor(Math.random() * 4);
-      this.pokemon = data[rndInt];
-      this.pokemons = data;
+      this.pokemon = data.answer;
+      this.pokemons = [data.answer, ...data.options].sort(
+        () => Math.random() - 0.5
+      );
     },
     checkAnswer() {
       this.showPokemon = true;
