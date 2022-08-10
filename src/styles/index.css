@@ -1,4 +1,10 @@
 html, body {
-  background-color: #f1f1f1;
-  margin: 0px;
+  background: #f46b45; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #f46b45,
+    #eea849
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f46b45, #eea849);
+  overflow: hidden;
 }

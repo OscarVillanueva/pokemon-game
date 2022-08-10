@@ -1,7 +1,10 @@
 <template>
-  <div class="scoreboard-container" :class="[left ? 'top-left' : 'top-right']">
+  <div
+    class="scoreboard-container"
+    :class="[left ? 'top-left' : 'top-right', bouncing]"
+  >
     <span class="material-symbols-outlined"> {{ icon }} </span>
-    <h2 :class="{ 'fade-long-in': bounce }">
+    <h2 :class="{ 'fade-long-in': fade }">
       {{ score }}
     </h2>
   </div>
@@ -24,19 +27,28 @@ export default {
       type: Boolean,
       default: true,
     },
+    bounce: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      bounce: false,
+      fade: false,
     };
+  },
+  computed: {
+    bouncing() {
+      return this.bounce ? "bounce" : "";
+    },
   },
   watch: {
     score(value, oldValue) {
       if (value !== oldValue) {
-        this.bounce = true;
+        this.fade = true;
 
         setTimeout(() => {
-          this.bounce = false;
+          this.fade = false;
         }, 500);
       }
     },

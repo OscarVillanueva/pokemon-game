@@ -63,3 +63,18 @@
     transform: translate3d(4px, 0, 0);
   }
 }
+
+/* Bounce */
+.bounce {
+  animation: bounce 1s infinite;
+  -webkit-animation: bounce 1s infinite;
+  -moz-animation: bounce 1s infinite;
+  -o-animation: bounce 1s infinite;
+  -ms-animation: bounce 1s infinite;
+}
+
+@keyframes bounce{
+  0% { transform: scale(1, 1) }
+  50% { transform: scale(0.8, 0.8) }
+  100% { transform: scale(1, 1) }
+}

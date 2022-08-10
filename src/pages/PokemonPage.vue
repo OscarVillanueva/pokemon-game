@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Board :score="score" />
-    <Board :score="life" :left="false" :icon="icon" />
+    <Board :score="life" :left="false" :icon="icon" :bounce="bounceLife" />
     <h1 v-if="!pokemon">Cargando . . .</h1>
     <div v-else>
       <h1>¿Quién es este Pokémon?</h1>
@@ -34,6 +34,7 @@ export default {
   },
   data() {
     return {
+      bounceLife: false,
       icon: "favorite",
       life: 3,
       message: "",
@@ -60,6 +61,8 @@ export default {
 
       if (this.life >= 0) setTimeout(() => this.next(), 2000);
       else this.icon = "heart_broken";
+
+      if (this.life === 0) this.bounceLife = true;
     },
     async next() {
       this.pokemon = null;

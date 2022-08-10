@@ -49,18 +49,20 @@ export default {
 /* Pokemon Options */
 ul {
   list-style-type: none;
+  margin-top: 4rem;
 }
 li {
-  background-color: white;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #ad3716;
+  border-radius: 1rem;
+  border: none;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
+  padding: 0.7rem 0rem;
   width: 250px;
 }
 
 li:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .options-container {
@@ -69,18 +71,18 @@ li:hover {
 }
 
 .correct {
-  background-color: rgb(154, 207, 74);
+  background-color: rgb(21, 128, 61);
 }
 
 .correct:hover {
-  background-color: rgb(154, 207, 74);
+  background-color: rgb(21, 128, 61);
 }
 
 .error {
-  background-color: rgba(255, 0, 0, 0.72);
+  background-color: rgb(220, 38, 38);
 }
 
 .error:hover {
-  background-color: rgba(255, 0, 0, 0.72);
+  background-color: rgb(220, 38, 38);
 }
 </style>
