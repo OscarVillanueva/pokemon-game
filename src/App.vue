@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import PokemonPage from './pages/PokemonPage.vue'
+import PokemonPage from "./pages/PokemonPage.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    PokemonPage
-  }
-}
+    PokemonPage,
+  },
+};
 </script>
 
 <style>
@@ -21,5 +21,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 </style>
