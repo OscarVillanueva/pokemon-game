@@ -2,11 +2,15 @@
   <div class="options-container">
     <ul>
       <li
-        v-for="pokemon in pokemons"
-        :key="pokemon.id"
-        @click="$emit('selection', pokemon.id)"
+        v-for="poke in pokemons"
+        :key="poke.id"
+        @click="checkAnswer(poke.id)"
+        :class="[
+          showAnswer &&
+            (poke.id === pokemon.id ? 'correct wiggle' : 'error fade-in'),
+        ]"
       >
-        {{ pokemon.name }}
+        {{ poke.name }}
       </li>
     </ul>
   </div>
@@ -20,6 +24,22 @@ export default {
       type: Array,
       required: true,
       default: [],
+    },
+    pokemon: {
+      type: Object,
+      required: true,
+      default: { id: 800, name: "Dummy" },
+    },
+  },
+  data() {
+    return {
+      showAnswer: false,
+    };
+  },
+  methods: {
+    checkAnswer() {
+      this.showAnswer = true;
+      this.$emit("selection");
     },
   },
 };
@@ -46,5 +66,21 @@ li:hover {
 .options-container {
   display: flex;
   justify-content: center;
+}
+
+.correct {
+  background-color: rgb(154, 207, 74);
+}
+
+.correct:hover {
+  background-color: rgb(154, 207, 74);
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.72);
+}
+
+.error:hover {
+  background-color: rgba(255, 0, 0, 0.72);
 }
 </style>

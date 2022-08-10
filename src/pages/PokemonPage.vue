@@ -3,12 +3,16 @@
   <div v-else>
     <h1>¿Quién es este Pokémon?</h1>
     <PokemonPicture :pokemonId="pokemon.id" :showPokemon="showPokemon" />
-    <PokemonOptions :pokemons="pokemons" @selection="checkAnswer" />
+    <PokemonOptions
+      :pokemons="pokemons"
+      @selection="checkAnswer"
+      :pokemon="pokemon"
+    />
 
-    <template v-if="showAnswer">
+    <!-- <template v-if="showAnswer">
       <h2 class="fade-in">{{ message }}</h2>
       <button @click="next">Siguiente</button>
-    </template>
+    </template> -->
   </div>
 </template>
 
@@ -31,7 +35,6 @@ export default {
       pokemons: [],
       pokemon: null,
       showPokemon: false,
-      showAnswer: false,
       message: "",
     };
   },
@@ -43,14 +46,9 @@ export default {
       this.pokemon = data[rndInt];
       this.pokemons = data;
     },
-    checkAnswer(selectedID) {
+    checkAnswer() {
       this.showPokemon = true;
-
-      if (selectedID === this.pokemon.id)
-        this.message = `Correcto, ${this.pokemon.name}`;
-      else this.message = `Oopps, era ${this.pokemon.name}`;
-
-      this.showAnswer = true;
+      setTimeout(() => this.next(), 2000);
     },
     async next() {
       this.pokemon = null;
