@@ -66,26 +66,26 @@ export default {
 
 .top-left {
   position: absolute;
-  top: -70px;
+  top: 0;
   left: 20px;
 }
 
 @media (min-width: 768px) {
   .top-left {
-    top: -40px;
+    top: 0;
     left: 40px;
   }
 }
 
 .top-right {
   position: absolute;
-  top: -70px;
+  top: 0;
   right: 20px;
 }
 
 @media (min-width: 768px) {
   .top-right {
-    top: -40px;
+    top: 0;
     right: 40px;
   }
 }

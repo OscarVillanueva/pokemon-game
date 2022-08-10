@@ -16,21 +16,38 @@
 </template>
 
 <script>
+import Board from "@/components/Board.vue";
 import PokemonOptions from "@/components/PokemonOptions.vue";
 import PokemonPicture from "@/components/PokemonPicture.vue";
-import Board from "@/components/Board.vue";
 
 import pokemonFactory from "@/helpers/getPokemonOptions";
 
 export default {
   name: "PokémonPage",
+  props: {
+    restart: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
-    PokemonPicture,
-    PokemonOptions,
     Board,
+    PokemonOptions,
+    PokemonPicture,
   },
   beforeMount() {
     this.getPokemons();
+  },
+  watch: {
+    restart(value, old) {
+      if (value !== old && value) {
+        this.life = 0;
+        this.score = 0;
+        this.icon = "favorite";
+        this.bounceLife = false;
+        this.next();
+      }
+    },
   },
   data() {
     return {
@@ -60,7 +77,12 @@ export default {
       else this.life = this.life - 1;
 
       if (this.life >= 0) setTimeout(() => this.next(), 2000);
-      else this.icon = "heart_broken";
+      else {
+        this.icon = "heart_broken";
+        setTimeout(() => {
+          this.$emit("over");
+        }, 1200);
+      }
 
       if (this.life === 0) this.bounceLife = true;
     },
