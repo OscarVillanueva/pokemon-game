@@ -1,7 +1,7 @@
 <template>
   <div
     class="scoreboard-container"
-    :class="[left ? 'top-left' : 'top-right', bouncing]"
+    :class="[left ? 'top-left' : 'top-right', bouncing, className]"
   >
     <span class="material-symbols-outlined"> {{ icon }} </span>
     <h2 :class="{ 'fade-long-in': fade }">
@@ -30,6 +30,10 @@ export default {
     bounce: {
       type: Boolean,
       default: false,
+    },
+    className: {
+      type: String,
+      default: "",
     },
   },
   data() {

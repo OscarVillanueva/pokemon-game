@@ -1,9 +1,18 @@
 <template>
   <div class="container">
     <Board :score="score" />
+
+    <Board
+      :score="highScore"
+      icon="sports_score"
+      className="high-score-container"
+    />
+
     <Board :score="life" :left="false" :icon="icon" :bounce="bounceLife" />
-    <h1 v-if="!pokemon">Cargando . . .</h1>
-    <div v-else>
+
+    <h1 v-if="!pokemon" class="h-screen sm-mt-10">Cargando . . .</h1>
+
+    <div v-else class="sm-mt-10">
       <h1>¿Quién es este Pokémon?</h1>
       <PokemonPicture :pokemonId="pokemon.id" :showPokemon="showPokemon" />
       <PokemonOptions
@@ -21,6 +30,7 @@ import PokemonOptions from "@/components/PokemonOptions.vue";
 import PokemonPicture from "@/components/PokemonPicture.vue";
 
 import pokemonFactory from "@/helpers/getPokemonOptions";
+import storageManager from "@/helpers/storageManager";
 
 export default {
   name: "PokémonPage",
@@ -37,11 +47,12 @@ export default {
   },
   beforeMount() {
     this.getPokemons();
+    this.highScore = storageManager.getScore();
   },
   watch: {
     restart(value, old) {
       if (value !== old && value) {
-        this.life = 0;
+        this.life = 3;
         this.score = 0;
         this.icon = "favorite";
         this.bounceLife = false;
@@ -59,6 +70,7 @@ export default {
       pokemons: [],
       score: 0,
       showPokemon: false,
+      highScore: 0,
     };
   },
   methods: {
@@ -76,9 +88,19 @@ export default {
       if (id === this.pokemon.id) this.score = this.score + 1;
       else this.life = this.life - 1;
 
-      if (this.life >= 0) setTimeout(() => this.next(), 2000);
-      else {
+      if (this.life >= 0) {
+        setTimeout(() => this.next(), 2000);
+
+        if (this.score > this.highScore && this.highScore !== 0)
+          this.highScore = this.score;
+      } else {
         this.icon = "heart_broken";
+
+        if (this.score > this.highScore) {
+          storageManager.saveScore(this.score);
+          this.highScore = this.score;
+        }
+
         setTimeout(() => {
           this.$emit("over");
         }, 1200);
@@ -99,7 +121,37 @@ export default {
 </script>
 
 <style scoped>
+.sm-mt-10 {
+  padding-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  .sm-mt-10 {
+    padding-top: 0;
+  }
+}
+
 .container {
   position: relative;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.high-score-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+
+@media (min-width: 768px) {
+  .high-score-container {
+    left: 40px;
+  }
 }
 </style>
