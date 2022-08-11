@@ -3,6 +3,7 @@
     <Board :score="score" />
 
     <Board
+      v-if="highScore > 0"
       :score="highScore"
       icon="sports_score"
       className="high-score-container"
