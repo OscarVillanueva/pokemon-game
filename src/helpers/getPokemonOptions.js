@@ -21,7 +21,7 @@ class PokemonFactory {
 
     while (!ready) {
 
-      id = Math.floor((Math.random() * 650) + 1);
+      id = Math.floor((Math.random() * 649) + 1);
 
       if (!this.already.includes(id) && answer === 0) {
 
